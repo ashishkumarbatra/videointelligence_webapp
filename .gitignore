@@ -1,0 +1,7 @@
+venv/
+temp/
+data/
+.idea/
+keys/
+src/__pycache__/
+*.pyc
