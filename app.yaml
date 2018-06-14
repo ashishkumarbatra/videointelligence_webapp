@@ -1,6 +1,12 @@
-runtime: python27
+runtime: python
+env: flex
+runtime_config:
+    python_version: 3
 api_version: 1
 threadsafe: true
+
+readiness_check:
+  app_start_timeout_sec: 3000
 
 handlers:
 - url: /
@@ -22,3 +28,4 @@ handlers:
 
 - url: /.*
   script: not_found.app
+
