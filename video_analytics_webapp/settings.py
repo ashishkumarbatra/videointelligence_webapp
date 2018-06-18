@@ -29,7 +29,7 @@ SECRET_KEY = '3t$qmj+9=&3smkc*pmv&%$by2he+ud+gwu(ijdysy99h0e)*)z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['zee-poc-growth-solutions.appspot.com','127.0.0.1']
 
 
 # Application definition
