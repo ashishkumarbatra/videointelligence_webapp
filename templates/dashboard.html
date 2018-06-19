@@ -105,7 +105,7 @@
                         parentData = data;
                         videoanalytics_data = data['video_analytics'];
 
-
+                        $("#video_analytics_div > div.col-sm-10 > p").empty();
                          $("#video_analytics_div > div.col-sm-10 > h5:nth-child(2)").text(videoanalytics_data['person'].length + " frames found");
                          <!--$("#video_analytics_div > div.col-sm-10 > p").text(videoanalytics_data['person'].toString())-->
                          <!--making urls-->
@@ -212,7 +212,7 @@
 
                            <!--DETAILS PAGE-->
 
-                        $("#details_heading_div").empty();
+                        $("#details_heading_div.row").empty();
                         keys = Object.keys(data['video_analytics']['publicUrls'])
 
                         for(i=0;i<keys.length;i++){
@@ -384,11 +384,9 @@
                     <div id="loading" height="">
                         <img src="https://cdn-images-1.medium.com/max/1600/1*W8cj-FRc58UozzcMWqVPZw.gif"/>
                     </div>
-                    <div id="details_heading_div" class ="row" style="width: 800px; height: 300px;></div>
+                    <div id="details_heading_div" class ="row" style="width: 800px; height: 300px;>
 
-              <br>
-               </div>
-
+                    </div>
                 <div class="row" id ="vision_analytics_div"></div>
                 <div class="col-sm-2 text-center">
                   <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images.png" class=" " height="65" width="65" alt="Avatar">
