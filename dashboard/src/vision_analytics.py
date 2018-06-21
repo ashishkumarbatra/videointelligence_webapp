@@ -191,9 +191,10 @@ class VisionAnalytics(object):
         ### Hardcoded fix here
 
 
-        vide_frames_blob = bucket.blob('video_frames/0.463471.jpg')
-        bytesRead = vide_frames_blob.download_as_string()
-        im = Image.open(io.BytesIO(bytesRead))
+        # vide_frames_blob = bucket.blob('video_frames/0.463471.jpg')
+        # bytesRead = vide_frames_blob.download_as_string()
+        # im = Image.open(io.BytesIO(bytesRead))
+        im = Image.open(self.image)
         im2 = im.crop([vects[0].x, vects[0].y,
                        vects[2].x - 1, vects[2].y - 1])
 
