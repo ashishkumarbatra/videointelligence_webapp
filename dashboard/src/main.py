@@ -11,9 +11,9 @@ from pprint import pprint
 # from video_search import VideoSearch
 # from video_to_text import VideoToText
 # from vision_analytics import VisionAnalytics
-# from config import video_name, local_video_folder, video_frames_folder, local_tmp_folder, clean_folders
+# from config import local_video_folder, video_frames_folder, local_tmp_folder, clean_folders
 
-
+#
 from .nlp_analytics import NLPAnalytics
 from .video_intellegence import ParseVideo
 from .video_search import VideoSearch
@@ -26,7 +26,7 @@ class VideoIntelligenceRunner(object):
     def __init__(self):
         self.data = {}
 
-    def main(self, query='',video_name='',video_button='english'):
+    def main(self, query='',video_name='Here_how_Trump_North_Korea_summit_failed.mp4',video_button='english'):
         # return fixture_data
 
         #clean_folders()
@@ -40,7 +40,7 @@ class VideoIntelligenceRunner(object):
         self.data['vision_analytics'] = {}
 
         for image in process_video_data['frame_images']:
-            image_path = os.path.join(video_frames_folder, image)
+            image_path = os.path.join(local_tmp_folder,video_frames_folder, image)
             vanalytics = VisionAnalytics(image_path)
             vision_data = vanalytics.run()
             print("Statring vision analytics on ")

@@ -11,7 +11,7 @@ from google.cloud.speech import types
 
 # from fileutil import FileUtil
 #
-# from config import gcs_bucket, video_name, local_video_folder, video_encoding, local_tmp_folder, audio_folder, image_crops_frames
+# from config import gcs_bucket, local_video_folder, local_tmp_folder, audio_folder, image_crops_frames
 from .config import gcs_bucket, local_video_folder, local_tmp_folder, audio_folder, image_crops_frames
 # from .fileutil import FileUtil
 
