@@ -5,7 +5,7 @@ from google.cloud import storage
 import json
 import time
 
-# from config import gcs_bucket, local_video_folder, video_frames_folder, local_tmp_folder, video_frames_json
+# from config import gcs_bucket, video_name, local_video_folder, video_frames_folder, local_tmp_folder, video_frames_json
 # from fileutil import FileUtil
 
 from .config import gcs_bucket, local_video_folder, video_frames_folder, local_tmp_folder, video_frames_json

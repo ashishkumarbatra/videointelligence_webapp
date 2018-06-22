@@ -33,13 +33,17 @@ class VisionAnalytics(object):
 
     def create_vision_image(self, image_path):
         #with gcs.open('/videointelligence_demo/local/tmp/video_frames/0.463471.jpg', 'rb') as image_obj:
-        storage_client = storage.Client()
-        bucket = storage_client.get_bucket(gcs_bucket)
-        blob = bucket.blob(image_path)
-        # use blob no need to read the file
-        image_content = blob.download_as_string()
-        # with open(image_path, 'rb') as image_obj:
-        #     image_content = image_obj.read()
+        # storage_client = storage.Client()
+        # bucket = storage_client.get_bucket(gcs_bucket)
+        # blob = bucket.blob(image_path)
+        # # use blob no need to read the file
+        # image_content = blob.download_as_string()
+        # # with open(image_path, 'rb') as image_obj:
+        # #     image_content = image_obj.read()
+
+        with open(image_path, 'rb') as image_obj:
+            image_content = image_obj.read()
+
         vision_image = vision.types.Image(content=image_content)
 
         # vision_image = vision.types.Image()
@@ -50,7 +54,8 @@ class VisionAnalytics(object):
     def annotate(self):
 
         image_analytics = []
-        vision_image = self.create_vision_image(os.path.join(video_frames_folder+"/"+self.image_name))
+        # vision_image = self.create_vision_image(os.path.join(video_frames_folder+"/"+self.image_name))
+        vision_image = self.create_vision_image(self.image)
 
         labels = self.detect_labels(vision_image)
         web_result = self.detect_web(vision_image)
@@ -183,8 +188,8 @@ class VisionAnalytics(object):
         return vertices
 
     def _crop_to_hint(self, vects):
-        storage_client = storage.Client()
-        bucket = storage_client.get_bucket(gcs_bucket)
+        # storage_client = storage.Client()
+        # bucket = storage_client.get_bucket(gcs_bucket)
 
 
 
@@ -199,13 +204,24 @@ class VisionAnalytics(object):
                        vects[2].x - 1, vects[2].y - 1])
 
         #https://stackoverflow.com/questions/33101935/convert-pil-image-to-byte-array/33117447#33117447
-        imgByteArr = io.BytesIO()
-        im2.save(imgByteArr, format='JPEG')
-        imgByteArr = imgByteArr.getvalue()
+        # imgByteArr = io.BytesIO()
+        # im2.save(imgByteArr, format='JPEG')
+        # imgByteArr = imgByteArr.getvalue()
+        #
+        # output_image = os.path.join(image_crops_frames+"/"+self.image_name)
+        # cropped_blob = bucket.blob(output_image)
+        # cropped_blob.upload_from_string(imgByteArr)
+        output_dir = os.path.join(local_tmp_folder,
+                                    image_crops_frames)
 
-        output_image = os.path.join(image_crops_frames+"/"+self.image_name)
-        cropped_blob = bucket.blob(output_image)
-        cropped_blob.upload_from_string(imgByteArr)
+        output_image = os.path.join(output_dir,
+                                    'Image'+self.image_name+'.jpeg').replace(" ", '_')
+
+        directory = os.path.dirname(output_image)
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        im2.save(output_image)
 
         # im2.save(output_image)
         return output_image
@@ -220,7 +236,7 @@ if __name__ == '__main__':
     # image = os.path.join(local_video_folder, 'download.jpeg')
     image = os.path.join('gs://'+gcs_bucket+'/video_frames/'+ '0.463471.jpg')
     ana = VisionAnalytics(image)
-    ana.annotate()
+    #ana.annotate()
     ana.run()
 
 

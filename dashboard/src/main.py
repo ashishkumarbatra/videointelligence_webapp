@@ -11,9 +11,9 @@ from pprint import pprint
 # from video_search import VideoSearch
 # from video_to_text import VideoToText
 # from vision_analytics import VisionAnalytics
-# from config import local_video_folder, video_frames_folder, local_tmp_folder, clean_folders
+# from config import video_name, local_video_folder, video_frames_folder, local_tmp_folder, clean_folders
 
-#
+
 from .nlp_analytics import NLPAnalytics
 from .video_intellegence import ParseVideo
 from .video_search import VideoSearch
@@ -96,6 +96,6 @@ class VideoIntelligenceRunner(object):
 
 if __name__ == '__main__':
     vrunner = VideoIntelligenceRunner()
-    vrunner.main()
+    vrunner.main(query='kim')
 
 

@@ -5,7 +5,7 @@ import os
 from collections import defaultdict
 
 # from fileutil import FileUtil
-# from config import  local_video_folder
+# from config import video_name, local_video_folder
 # from video_to_text import VideoToText
 
 

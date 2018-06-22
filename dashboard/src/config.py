@@ -36,10 +36,10 @@ paths_to_make = [
 #         blob.upload_from_filename(target_file_path)
 #         print("Uploaded Video intelligence data to cloud", video_frames_json+'/'+target_file)
 #
-# for path in paths_to_make:
-#     if not os.path.exists(path):
-#         print("Creating folder", path)
-#         os.makedirs(path)
+for path in paths_to_make:
+    if not os.path.exists(path):
+        print("Creating folder", path)
+        os.makedirs(path)
 
 
 def clean_folders():

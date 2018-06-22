@@ -4,4 +4,5 @@ data/
 .idea/
 keys/
 src/__pycache__/
+dashboard/src/__pycache__/
 *.pyc
