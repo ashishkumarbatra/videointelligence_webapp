@@ -4,6 +4,8 @@ putting all things together
 import datetime
 import os
 from pprint import pprint
+from google.cloud import storage
+
 
 # RUn Directly
 # from nlp_analytics import NLPAnalytics
@@ -19,7 +21,7 @@ from .video_intellegence import ParseVideo
 from .video_search import VideoSearch
 from .video_to_text import VideoToText
 from .vision_analytics import VisionAnalytics
-from .config import local_video_folder, video_frames_folder, local_tmp_folder, clean_folders
+from .config import local_video_folder, video_frames_folder, local_tmp_folder, clean_folders,gcs_bucket
 
 
 class VideoIntelligenceRunner(object):
@@ -30,6 +32,27 @@ class VideoIntelligenceRunner(object):
         # return fixture_data
 
         #clean_folders()
+
+
+        ## checking for pre processed files and returning
+        client = storage.Client()
+        bucket = client.get_bucket(gcs_bucket)
+        archived_processed_data = video_name + '.txt'
+        # archived_processed_data = "Here_how_Trump_North_Korea_summit_failed.mp4" + '.txt'
+        blob = bucket.blob('processed_data/' + archived_processed_data)
+
+        if blob.exists():
+            print("Processed data exists and returning from cache")
+            blob.download_to_filename('data.txt')
+            with open('data.txt') as json_file:
+                import json
+                read_data = json.load(json_file)
+            self.data = read_data
+            print("Return from cache for video " + video_name)
+            return self.data
+
+        ## no processed fiels exists
+
         print("Starting Video Processing for video",video_name, datetime.datetime.now())
         video_parse = ParseVideo(video_name)
         process_video_data = video_parse.run()
@@ -79,6 +102,12 @@ class VideoIntelligenceRunner(object):
         import json
         with open('data.txt', 'w') as outfile:
             json.dump(self.data, outfile)
+
+        print("uploading processed data to storage")
+        archived_processed_data = video_name + '.txt'
+        blob = bucket.blob('processed_data/' + archived_processed_data)
+        blob.upload_from_filename('data.txt')
+
         return self.data
 
     def search(self, video_abs_path, words, query):

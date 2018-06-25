@@ -5,4 +5,5 @@ data/
 keys/
 src/__pycache__/
 dashboard/src/__pycache__/
+data.txt
 *.pyc

@@ -4,6 +4,8 @@ from collections import defaultdict
 import os
 import subprocess
 from google.cloud import storage
+import six
+from google.cloud import translate
 
 from google.cloud import speech
 from google.cloud.speech import enums
@@ -11,7 +13,7 @@ from google.cloud.speech import types
 
 # from fileutil import FileUtil
 #
-# from config import gcs_bucket, video_name, local_video_folder, video_encoding, local_tmp_folder, audio_folder, image_crops_frames
+# from config import gcs_bucket, local_video_folder, local_tmp_folder, audio_folder, image_crops_frames
 from .config import gcs_bucket, local_video_folder, local_tmp_folder, audio_folder, image_crops_frames
 # from .fileutil import FileUtil
 
@@ -181,6 +183,11 @@ class VideoToText(object):
 
             for word_info in alternative.words:
                 word = word_info.word.lower()
+                # convert to english if language is hindi
+                if(self.video_encoding == 'hi-IN'):
+                    print('Translating text from hindi to english for speech analytics words')
+                    translation_response = self.translate_text('en',word)
+                    word = translation_response['translatedText'].lower()
                 start_time = word_info.start_time
                 end_time = word_info.end_time
                 timestamp_word[word].append({
@@ -190,16 +197,40 @@ class VideoToText(object):
 
         return {'transcript': "\r\n".join(transcript), 'words': dict(timestamp_word)}
 
+    def translate_text(self,target, text):
+        # [START translate_translate_text]
+        """Translates text into the target language.
+        Target must be an ISO 639-1 language code.
+        See https://g.co/cloud/translate/v2/translate-reference#supported_languages
+        """
+        translate_client = translate.Client()
+
+        if isinstance(text, six.binary_type):
+            text = text.decode('utf-8')
+
+        # Text can also be a sequence of strings, in which case this method
+        # will return a sequence of results for each text.
+        result = translate_client.translate(
+            text, target_language=target)
+
+        # print(u'Text: {}'.format(result['input']))
+        # print(u'Translation: {}'.format(result['translatedText']))
+        # print(u'Detected source language: {}'.format(
+        #   result['detectedSourceLanguage']))
+        return result
+        # [END translate_translate_text]
+
     def run(self, **kwargs):
         self.extract_audio(**kwargs)
         audio_url = self.upload_to_storage(**kwargs)
         speech_data = self.extract_text(**kwargs)
         speech_data['audio_url'] = audio_url
         speech_data['audio_tmp_url'] = os.path.join('temp', self.audio_file_name)
+        print(speech_data)
         return speech_data
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     # video_path = FileUtil.join(local_video_folder, video_name)
-    extractor = VideoToText('Here_how_Trump_North_Korea_summit_failed.mp4')
+    extractor = VideoToText('short_kim_trump.mp4','hi-IN')
     extractor.run()

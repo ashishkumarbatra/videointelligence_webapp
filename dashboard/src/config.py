@@ -28,6 +28,7 @@ paths_to_make = [
     os.path.join(local_tmp_folder, video_frames_folder),
     os.path.join(local_tmp_folder, image_crops_frames),
     os.path.join(local_tmp_folder, audio_folder),
+    local_tmp_folder
 ]
 # client = storage.Client()
 #         bucket = client.get_bucket(gcs_bucket)
@@ -50,4 +51,4 @@ def clean_folders():
                 os.unlink(file_path)
                 print("Deleted", file_path)
 
-#clean_folders()
+clean_folders()
