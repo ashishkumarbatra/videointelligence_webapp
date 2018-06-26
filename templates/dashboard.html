@@ -48,7 +48,7 @@
                 <!--text-align: center;-->
             }
             .video_box{width: 100%; min-height: 300px; height: auto;}
-      .btn_process{padding: 5px 12px !important; font-size: 16px !important; line-height: 1.3333333; border-radius: 0px !important; background: #03a67b !important; box-shadow: 1px 1px 1px #0000001f;color: #fff; margin-bottom: 10px;}
+      .btn_process{padding: 5px 12px !important; font-size: 16px !important; line-height: 1.3333333; border-radius: 4px !important; background: #03a67b !important; box-shadow: 1px 1px 1px #0000001f;color: #fff; margin-bottom: 10px; border: none;}
       .query-text{text-align: left; line-height: 2; font-size: 16px; font-weight: normal;margin-right: 10px;}
       .process_input{margin-bottom: 10px !important; border-radius: 0px !important;margin-right: 10px; }
       .query_box{margin: 15px; background: #f4f4f4; padding: 14px 14px;margin: 14px !important;}
@@ -57,6 +57,31 @@
       .letter-spacing-2{letter-spacing: 2px;}
       .m-r-10{margin-right: 10px;}
 
+      .active_a{
+    background: #03a67b !important;
+    border: 1px solid #03a67b;
+    color: #fff !important;
+      }
+
+    .dec_box{
+        background:#f9f9f9 !important;
+        padding: 16px 0px !important;
+        border: 1px solid #ddd !important;
+        margin: 20px 0px 0px 0px !important;
+    }
+
+    #video_analytics_div p a{
+        display: inline-block;
+        margin: 4px;
+        width: 80px;
+        height: 80px;
+    }
+    #video_analytics_div p a .play_ic{
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        margin-top: 54px;
+    }
         </style>
 
         <script>
@@ -67,7 +92,7 @@
                 $("#search_data").empty();
                 $("#nlp_data").empty()
                  $("#vision_image_links_details").empty()
-                 $("#details_heading_div.row").empty();
+                 $("#details_heading_div.col-sm-11").empty();
                  $("#video_analytics_div > div.col-sm-10 > p").empty();
                  $("#speech_analytics_transcript").empty();
                  $("#vision_analytics_frame_count").empty();
@@ -115,7 +140,7 @@
                         videoanalytics_data = data['video_analytics'];
 
                         $("#video_analytics_div > div.col-sm-10 > p").empty();
-                         $("#video_analytics_div > div.col-sm-10 > h5:nth-child(2)").text(videoanalytics_data['person'].length + " frames found");
+                         <!--$("#video_analytics_div > div.col-sm-10 > h5:nth-child(2)").text(videoanalytics_data['person'].length + " frames found");-->
                          <!--$("#video_analytics_div > div.col-sm-10 > p").text(videoanalytics_data['person'].toString())-->
                          <!--making urls-->
                          persons_data = videoanalytics_data['person'];
@@ -127,7 +152,7 @@
                             if(query_val=="" || isExistingVal)
                             {
                                 img_public_url = data['video_analytics']['publicUrls'][key];
-                                timestampElement = '<a href="#" onclick="process_timestamp(this.id)" id ="'+timestamp+'"><img id = '+timestamp +' src='+ img_public_url+' style="width: 55px;  border-radius: 60%;"></a>&nbsp;&nbsp;';
+                                timestampElement = '<a href="#" onclick="process_timestamp(this.id)" id ="'+timestamp+'"><img src="https://www.camperking.co.uk/news/wp-content/uploads/2011/03/Camper-Play-Icon.png" class="play_ic"><img id = '+timestamp +' src='+ img_public_url+' style="width: 80px; height:80px; border-radius: 60%;"></a>&nbsp;&nbsp;';
                                 $("#video_analytics_div > div.col-sm-10 > p").append(timestampElement);
                                 }
                             }
@@ -172,7 +197,7 @@
                          $("#vision_image_links").empty();
                          for(i=0;i<visionanlytics_data_keys.length;i++){
                             linkName = visionanlytics_data_keys[i];
-                            linkElement = '<a href="#" onclick="vision_analytics_details(this.id)" id ="'+linkName+'">' + linkName + '</a>&nbsp;';
+                            linkElement = '<a href="#" onclick="vision_analytics_details(this.id)" id ="'+linkName+'" style="padding: 5px 10px; background: #dddddd36; border-radius: 16px; margin: 4px 2px !important; border: 1px solid #ddd; float:left;">' + linkName + '</a>';
                             $("#vision_image_links").append(linkElement);
                          }
                         <!--Search Data-->
@@ -242,12 +267,12 @@
 
                            <!--DETAILS PAGE-->
 
-                        $("#details_heading_div.row").empty();
+                        $("#details_heading_div.col-sm-11").empty();
                         keys = Object.keys(data['video_analytics']['publicUrls'])
 
                         for(i=0;i<keys.length;i++){
                             frame_public_url=data['video_analytics']['publicUrls'][keys[i]];
-                            element = '<a href='+frame_public_url+' target="_blank"><img id = '+keys[i] +' src='+ frame_public_url+' width="125px;"> &nbsp;</a>';
+                            element = '<a href='+frame_public_url+' target="_blank"><img id = '+keys[i] +' src='+ frame_public_url+' width="80px;" style="margin:4px;"> &nbsp;</a>';
                             if(i>0 && i%5 ==0){
                                 element = element +'<br>';
                             }
@@ -293,6 +318,8 @@
             }
              function vision_analytics_details(elementId){
                             $("#vision_image_links_details").empty()
+                            <!--selector = "#"+elementId;-->
+                            <!--$(selector).addClass("active");-->
                             data = parentData;
                             <!--labels = data["vision_analytics"][elementId][elementId][0]["labels"];-->
                             labelId = elementId +"_label";
@@ -421,14 +448,14 @@
 
         <div class="container-fluid">
           <div class="row content">
-            <div class="col-sm-5 sidenav"><br/>
+            <div class="col-sm-6 sidenav"><br/>
               <h3>Video Intelligence </h3><br/>
                 <!--allow="autoplay;-->
                 <!--Hard coding image location  https://storage.googleapis.com/videointelligence_demo/local/data/Here_how_Trump_North_Korea_summit_failed.mp4-->
                 <button type="button" class="btn-lg btn_process" onclick="process_video_name(this.id)" id="english">English Video</button>
                 <button type="button" class="btn-lg btn_process" onclick="process_video_name(this.id)" id="hindi">Hindi Video</button>
               <!--<iframe class="video_box" src="" frameborder="0"  id="videobox"></iframe>-->
-                <video id="videobox" class="video-js" width="625" height="300" controls="controls" preload="auto" style="height:300px;width:600px;">
+                <video id="videobox" class="video-js" controls="controls" preload="auto" style="min-height:300px;width:100%;">
                     <source src="" type="video/mp4" />
                 </video>
             <div class="row">
@@ -443,29 +470,30 @@
                 </form>
 
                 <p class="text-muted col-sm-12">You can query for any type of data related to this video</p>
-                <br>
-                <br>
-                <div class="row" id="video_analytics_div">
-                    <div class="col-sm-2 text-center">
-                      <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images.png" class=" " height="65" width="65" alt="Avatar">
+
+            </div>
+
+            <div class="row dec_box" id="video_analytics_div"  style="margin-top: 20px;">
+                    <div class="col-sm-1 text-center">
+                      <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images.png" class=" " height="46" width="46" alt="Avatar">
                     </div>
                 <div class="col-sm-10">
                   <h5 class="text-uppercase text-primary">Frame With Timestamps</h5>
                     <h5 class="text-uppercase"> <small> found  at video timestamp</small></h5>
+                  <p class="text-danger" style="word-wrap: break-word; margin-right: 58px;">
                     <span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/></span>
-                  <p class="text-danger" style="word-wrap: break-word; margin-right: 58px;"></p>
+                    </p>
                 </div>
 
               </div>
-
-               <div class="row" id="speech_analytics_div">
+               <div class="row dec_box" id="speech_analytics_div" style="margin-top: 20px;">
                     <div class="col-sm-2 text-center">
-                      <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/video_analytics_data.png" class=" " height="65" width="65" alt="Avatar">
+                      <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/video_analytics_data.png" class=" " height="46" width="46" alt="Avatar">
                     </div>
                 <div class="col-sm-10">
                   <h5 class="text-uppercase text-primary">Speech Analytics</h5>
                     <h5 class="text-uppercase"> TRANSCRIPT OF THE VIDEO</h5>
-                    <pre id="speech_analytics_transcript" style="word-wrap: break-word;"></pre>
+                    <p id="speech_analytics_transcript" style="word-wrap: break-word; max-height: 200px; overflow-x: auto;"></p>
                     <!--<span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/></span> QUERY EXISTENCE IN VIDEO-->
                   <!--<pre class="text-danger" style="word-wrap: break-word;" id = "speech_analytics_words"></pre>-->
                 </div>
@@ -473,60 +501,72 @@
               </div>
             </div>
 
-            </div>
+            <div class="col-sm-6" style="">
 
-            <div class="col-sm-7"><br/><br/><br/><br/>
-
-                <div id = details_section style="width: 800px; height: 300px;">
+                <div id = "details_section" class=" dec_box" style="margin-top: 137px !important;">
+                    <div class="col-sm-1 text-center">
+                      <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images_captured.png" class=" " height="46" width="46" alt="Avatar">
+                    </div>
+                    <div class="col-sm-11" >
                     <h3 id ="details_heading"><small class="text-primary letter-spacing-2">FRAMES CAPTURED </small></h3>
+                    <h5 class="text-uppercase"> frames captured <small> found  at video timestamp</small></h5>
+                    </div>
                     <div id="loading" height="">
                         <img src="https://cdn-images-1.medium.com/max/1600/1*W8cj-FRc58UozzcMWqVPZw.gif"/>
                     </div>
-                    <div id="details_heading_div" class ="row" style="width: 800px; height: 300px;>
+                    <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div id="details_heading_div" class="col-sm-11" style="height: auto;">
+                    </div>
+                    </div>
+              </div>
+                <div class="row" id ="vision_analytics_div"></div>
+                <div class="row dec_box" style="margin-top: 40px;">
+                    <div class="col-sm-1 text-center">
+                      <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images_vision.png" class=" " height="46" width="46" alt="Avatar">
+                    </div>
+                    <div class="col-sm-10" >
+                      <h5 class="text-uppercase text-primary">VISION ANALYTICS</h5>
+                        <h5 class="text-uppercase"> frames captured <small> found  at video timestamp</small></h5>
+
+                      <p class="text-danger" id="vision_analytics_frame_count">
+                        <span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/>
+
+                          </span>
+                        </p>
+                        <p class="text-danger col-sm-12 row" id ="vision_image_links" style=""><span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_label.png"/></span></p>
+
+
+                        <p class="text-danger" id ="vision_image_links_details"  ></p>
 
                     </div>
-                <div class="row" id ="vision_analytics_div"></div>
-                <div class="col-sm-2 text-center">
-                  <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images.png" class=" " height="65" width="65" alt="Avatar">
-                </div>
-                <div class="col-sm-10" >
-                  <h5 class="text-uppercase text-primary">VISION ANALYTICS</h5>
-                    <h5 class="text-uppercase"> frames captured <small> found  at video timestamp</small></h5>
-                    <span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/></span>
-                  <p class="text-danger" id="vision_analytics_frame_count"></p>
-                    <p class="text-danger" id ="vision_image_links" style="word-wrap: break-word; margin-right: 58px;"></p>
-                    <span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_label.png"/></span>
-
-                    <p class="text-danger" id ="vision_image_links_details"  ></p>
-
                 </div>
 
-              </div>
-                <br>
-                <div class="row" id="search_data_div">
-                <div class="col-sm-2 text-center">
-                  <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images.png" class=" " height="65" width="65" alt="Avatar">
+                <div class="row dec_box" id="search_data_div"  style="margin-top: 20px;">
+                <div class="col-sm-1 text-center">
+                  <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images_audio.png" class=" " height="46" width="46" alt="Avatar">
                 </div>
                 <div class="col-sm-10">
                   <h5 class="text-uppercase text-primary" > AUDIO SEARCH DATA</h5>
                     <h5 class="text-uppercase" id="search_title"></h5>
+                  <p class="text-danger" id="search_data">
                     <span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/></span>
-                  <p class="text-danger" id="search_data"></p>
+                    </p>
                 </div>
 
               </div>
-                <div class="row" id="nlp_analytics_div">
-                <div class="col-sm-2 text-center">
-                  <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images.png" class=" " height="65" width="65" alt="Avatar">
+                <div class="row dec_box" id="nlp_analytics_div"  style="margin-top: 20px;">
+                <div class="col-sm-1 text-center">
+                  <img src="https://storage.googleapis.com/videointelligence_demo/icon_img/frame_images_language.png" class=" " height="46" width="46" alt="Avatar">
                 </div>
                 <div class="col-sm-10">
                   <h5 class="text-uppercase text-primary" > Natural Language Analytics</h5>
-                    <span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/></span>
-                  <p class="text-danger" id="nlp_data"></p>
+                  <p class="text-danger" id="nlp_data"><span><img src="https://storage.googleapis.com/videointelligence_demo/icon_img/ic_time.png"/></span></p>
                 </div>
 
               </div>
-             <hr>
+
+
             </div>
           </div>
         </div>
@@ -613,8 +653,8 @@
                       <!--<br>-->
 
                     <!--<div class="row">-->
-                        <!--<div class="col-sm-2 text-center">-->
-                          <!--<img src="img/frame_images.png" class=" " height="65" width="65" alt="Avatar">-->
+                        <!--<div class="col-sm-1 text-center">-->
+                          <!--<img src="img/frame_images.png" class=" " height="46" width="46" alt="Avatar">-->
                         <!--</div>-->
                         <!--<div class="col-sm-10">-->
                           <!--<h5 class="text-uppercase text-primary">Frame_Images</h5>-->
