@@ -63,7 +63,7 @@ rsa = "==3.4.2"
 six = "==1.11.0"
 uritemplate = "==3.0.0"
 "urllib3" = "==1.22"
-Django = "==2.0.5"
+Django = "==2.2.10"
 Pillow = "==5.1.0"
 
 [dev-packages]
