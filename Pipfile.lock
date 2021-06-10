@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ab6772105c7e72a4774fdc601b480c52cb954390e814384499f97ec4fea553a0"
+            "sha256": "5f637c40b158b8e200dba99107dc9355d60365c6c00fbfb38e20c45f85162c57"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -56,11 +56,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:26b34f4417aa38d895b6b5307177b51bc3f4d53179d8696a5c19dcb50582523c",
-                "sha256:71d1a584bb4ad2b4f933d07d02c716755c1394feaac1ce61ce37843ac5401092"
+                "sha256:3339ff0e03dee13045aef6ae7b523edff75b6d726adf7a7a48f53d5a501f7db7",
+                "sha256:f2084ceecff86b1e631c2cd4107d435daf4e12f1efcdf11061a73bf0b5e95f92"
             ],
             "index": "pypi",
-            "version": "==2.0.5"
+            "version": "==2.2.24"
         },
         "future": {
             "hashes": [
@@ -91,6 +91,9 @@
             "version": "==0.91.3"
         },
         "google-api-core": {
+            "extras": [
+                "grpc"
+            ],
             "hashes": [
                 "sha256:0144d467083ed54d2e8ccb4212d42c3724fe0b844b7d3a0ff85aea54b7ae8347",
                 "sha256:1698e4af4edd2a8ec22d678fd9abe99c926c3a154b2232f32807946ca49e3da1"
@@ -124,6 +127,7 @@
         },
         "google-cloud": {
             "hashes": [
+                "sha256:1baabf34dd4dc85b08c761c6afb12937503b1b90343971d1417315451a1e2500",
                 "sha256:67494b9754bd0a1e350dd00fe65faf3e0cfc0ae5f60a0dd57a3744d1bc7bb5ba"
             ],
             "index": "pypi",
@@ -162,6 +166,9 @@
             "version": "==0.1.1"
         },
         "google-cloud-core": {
+            "extras": [
+                "grpc"
+            ],
             "hashes": [
                 "sha256:0090df83dbc5cb2405fa90844366d13176d1c0b48181c1807ab15f53be403f73",
                 "sha256:89e8140a288acec20c5e56159461d3afa4073570c9758c05d4e6cb7f2f8cc440"
@@ -322,6 +329,9 @@
             "version": "==0.3.1"
         },
         "googleapis-common-protos": {
+            "extras": [
+                "grpc"
+            ],
             "hashes": [
                 "sha256:c075eddaa2628ab519e01b7d75b76e66c40eaa50fc52758d8225f84708950ef2"
             ],
@@ -447,6 +457,9 @@
             "version": "==3.8"
         },
         "proto-google-cloud-datastore-v1": {
+            "extras": [
+                "grpc"
+            ],
             "hashes": [
                 "sha256:a431bb6a286107900c9ce3c48d316378867293c50a4d8a6c7393264600e916f9"
             ],
@@ -454,6 +467,9 @@
             "version": "==0.90.4"
         },
         "proto-google-cloud-error-reporting-v1beta1": {
+            "extras": [
+                "grpc"
+            ],
             "hashes": [
                 "sha256:526f49ae84dec16aa4740415c86a919d48206001d116d12df5badc5b2b051b82"
             ],
@@ -461,6 +477,9 @@
             "version": "==0.15.3"
         },
         "proto-google-cloud-logging-v2": {
+            "extras": [
+                "grpc"
+            ],
             "hashes": [
                 "sha256:e0538745f0f33760ffd5116f33385113835a3b2042a6c914923be0539e5280ce"
             ],
@@ -510,6 +529,7 @@
         },
         "pyasn1": {
             "hashes": [
+                "sha256:24f21b4fd2dc2b344dee2205fa3930464aa21292216d3d6e39007a2e059e21af",
                 "sha256:2f57960dc7a2820ea5a1782b872d974b639aa3b448ac6628d1ecc5d0fe3986f2",
                 "sha256:3651774ca1c9726307560792877db747ba5e8a844ea1a41feb7670b319800ab3",
                 "sha256:602fda674355b4701acd7741b2be5ac188056594bf1eecf690816d944e52905e",
@@ -584,6 +604,14 @@
             ],
             "index": "pypi",
             "version": "==1.11.0"
+        },
+        "sqlparse": {
+            "hashes": [
+                "sha256:017cde379adbd6a1f15a61873f43e8274179378e95ef3fede90b5aa64d304ed0",
+                "sha256:0f91fd2e829c44362cbcfab3e9ae12e22badaa8a29ad5ff599f9ec109f0454e8"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==0.4.1"
         },
         "uritemplate": {
             "hashes": [
